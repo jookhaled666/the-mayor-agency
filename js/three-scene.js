@@ -186,3 +186,13 @@ function animateGalaxy() {
        galaxyRenderer.render(galaxyScene, galaxyCamera);
     }
 }
+
+// Window resize handling for Galaxy Camera
+window.addEventListener('resize', () => {
+    const container = document.getElementById('galaxy-container');
+    if(container && galaxyCamera && galaxyRenderer) {
+        galaxyCamera.aspect = container.clientWidth / container.clientHeight;
+        galaxyCamera.updateProjectionMatrix();
+        galaxyRenderer.setSize(container.clientWidth, container.clientHeight);
+    }
+});

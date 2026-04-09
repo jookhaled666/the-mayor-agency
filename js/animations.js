@@ -226,10 +226,31 @@ function initPageAnimations(pageKey) {
       tl.to({}, { duration: 0.2 });
     }
 
-    // Standard Entrance animations for other general cards
-    const generalCards = document.querySelectorAll('.service-card, .timeline-item, .info-block, .project-card');
-    if (generalCards.length > 0) {
-      gsap.fromTo(generalCards, 
+    // Add professional stagger effect to the new 10 Project/Brand cards
+    const projectCards = document.querySelectorAll('.project-card');
+    if (projectCards.length > 0) {
+      gsap.fromTo(projectCards, 
+        { y: 100, opacity: 0, scale: 0.9, rotationX: 15 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          rotationX: 0,
+          stagger: 0.1,
+          duration: 1,
+          ease: 'back.out(1.2)',
+          scrollTrigger: {
+            trigger: '.examples-grid',
+            start: 'top 85%'
+          }
+        }
+      );
+    }
+
+    // Standard Entrance animations for other general elements
+    const generalElements = document.querySelectorAll('.service-card, .timeline-item, .info-block');
+    if (generalElements.length > 0) {
+      gsap.fromTo(generalElements, 
         { y: 50, opacity: 0 },
         {
           y: 0,
@@ -238,7 +259,7 @@ function initPageAnimations(pageKey) {
           duration: 0.8,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: generalCards[0],
+            trigger: generalElements[0],
             start: 'top 85%'
           }
         }
