@@ -179,19 +179,19 @@ function initPageAnimations(pageKey) {
       });
     }
 
-    // 3. Cinematic Brand Classes Slide in
+    // 3. Cinematic Brand Classes Slide in (Now Tumble Scrub)
     const classCards = document.querySelectorAll('.class-card');
     classCards.forEach(card => {
-       gsap.to(card, {
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%'
-          }
+       const tl = gsap.timeline({
+         scrollTrigger: {
+           trigger: card,
+           start: 'top 90%',
+           end: 'bottom 10%',
+           scrub: true
+         }
        });
+       tl.fromTo(card, { rotateX: 60, y: 100, opacity: 0, scale: 0.8 }, { rotateX: 0, y: 0, opacity: 1, scale: 1, duration: 1 })
+         .to(card, { rotateX: -60, y: -100, opacity: 0, scale: 0.8, duration: 1 });
     });
 
     // 4. Flip Services Cards (Scrubbing)

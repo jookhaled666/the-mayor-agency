@@ -102,24 +102,45 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
        galaxyRenderer.setSize(container.clientWidth, container.clientHeight);
        container.appendChild(galaxyRenderer.domElement);
        
-       const geometry = new THREE.BufferGeometry();
-       const vertices = [];
-       for (let i = 0; i < 2500; i++) {
-           const x = THREE.MathUtils.randFloatSpread(500);
-           const y = THREE.MathUtils.randFloatSpread(500);
-           const z = THREE.MathUtils.randFloatSpread(500);
-           vertices.push(x, y, z);
+       const brandNames = ["GUCCI", "PRADA", "ROLEX", "CHANEL", "DIOR", "BMW", "SAMSUNG", "APPLE", "LOUIS VUITTON", "PORSCHE", "AMAZON", "NETFLIX", "CARTIER", "HERMES", "BENTLEY"];
+       particles = new THREE.Group();
+       
+       for (let i = 0; i < 150; i++) {
+           const canvas = document.createElement('canvas');
+           canvas.width = 256;
+           canvas.height = 64;
+           const context = canvas.getContext('2d');
+           context.fillStyle = 'rgba(0,0,0,0)';
+           context.fillRect(0, 0, 256, 64);
+           
+           context.font = 'bold 36px sans-serif';
+           context.textAlign = 'center';
+           context.textBaseline = 'middle';
+           
+           context.fillStyle = '#ffb07c';
+           const text = brandNames[Math.floor(Math.random() * brandNames.length)];
+           context.fillText(text, 128, 32);
+           
+           context.strokeStyle = 'rgba(255, 176, 124, 0.4)';
+           context.lineWidth = 2;
+           context.strokeRect(5, 5, 246, 54);
+
+           const texture = new THREE.CanvasTexture(canvas);
+           const material = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.9 });
+           const sprite = new THREE.Sprite(material);
+           
+           const r = 250 + Math.random() * 200;
+           const theta = Math.random() * 2 * Math.PI;
+           const phi = Math.acos(2 * Math.random() - 1);
+           
+           sprite.position.x = r * Math.sin(phi) * Math.cos(theta);
+           sprite.position.y = r * Math.sin(phi) * Math.sin(theta);
+           sprite.position.z = r * Math.cos(phi);
+           
+           sprite.scale.set(40, 10, 1);
+           particles.add(sprite);
        }
-       geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
        
-       const material = new THREE.PointsMaterial({
-           color: 0xffb07c,
-           size: 1.5,
-           transparent: true,
-           opacity: 0.8
-       });
-       
-       particles = new THREE.Points(geometry, material);
        galaxyScene.add(particles);
        
        animateGalaxy();

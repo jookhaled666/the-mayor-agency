@@ -64,14 +64,7 @@
   color: var(--color-black);
 }
 
-/* Specific to region switch for styling */
-.region-switch span.active {
-  background: linear-gradient(145deg, var(--color-apricot), var(--color-apricot-dark));
-  border-radius: 16px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.5);
-}
-
-/* Language switch active styling */
+/* Removed specific region/lang switch colors, handled by lightswitch logic above */
 .lang-switch span.active {
   color: var(--color-white);
   text-shadow: 0 0 5px rgba(255,255,255,0.5);
@@ -207,3 +200,47 @@ main {
 main.fading {
   opacity: 0;
 }
+
+/* Transition Preloader */
+.preloader-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100vh;
+  background-color: var(--color-black);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 176, 124, 0.1) 0%, transparent 60%),
+    url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.03"/></svg>');
+}
+.preloader-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.preloader-content {
+  text-align: center;
+}
+.map-icon {
+  width: 80px; height: 80px; color: var(--color-apricot); margin-bottom: 20px;
+  animation: pulse-map 2s infinite ease-in-out;
+}
+@keyframes pulse-map {
+  0% { transform: scale(1); filter: drop-shadow(0 0 5px var(--color-apricot)); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 20px var(--color-apricot)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--color-apricot)); }
+}
+#preloader-text {
+  font-size: 2rem; color: var(--color-white); letter-spacing: 3px; font-weight: 300; margin-bottom: 30px; text-transform: uppercase;
+}
+.progress-bar {
+  width: 300px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin: 0 auto;
+}
+.progress-fill {
+  width: 0%; height: 100%; background: var(--color-apricot); transition: width 2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+

@@ -39,12 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
           regionSwitch.querySelector('.active').classList.remove('active');
           e.target.classList.add('active');
 
-          transitionEarth(selected);
-          currentRegion = selected;
+          const preloader = document.getElementById('transition-preloader');
+          const preText = document.getElementById('preloader-text');
+          const pFill = document.querySelector('.progress-fill');
+          preText.innerText = selected === 'egypt' ? 'Flying to Egypt...' : 'Flying to Dubai...';
+          preloader.classList.add('active');
           
-          if (currentPage === 'home') {
-             window.renderPage('home'); 
-          }
+          setTimeout(() => { pFill.style.width = '100%'; }, 50);
+
+          setTimeout(() => {
+             transitionEarth(selected);
+             currentRegion = selected;
+             pFill.style.width = '0%';
+             
+             if (currentPage === 'home') {
+                window.renderPage('home'); 
+             }
+             
+             preloader.classList.remove('active');
+             if(window.lucide) { lucide.createIcons(); }
+          }, 2500);
         }
       });
     });
