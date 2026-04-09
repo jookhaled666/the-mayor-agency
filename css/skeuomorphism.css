@@ -1,0 +1,88 @@
+/* Neo-Skeuomorphism Core Styles */
+.leather-panel {
+  background-color: var(--color-black-light);
+  /* A dark subtle noise to simulate leather/texture */
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.05"/></svg>');
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 
+    10px 10px 30px rgba(0, 0, 0, 0.8),
+    -5px -5px 15px rgba(255, 255, 255, 0.02),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  position: relative;
+}
+
+/* Debossed text/inputs (Sunken effect) */
+.debossed-input {
+  background: #080808;
+  border: none;
+  border-radius: 8px;
+  color: var(--color-apricot);
+  box-shadow: 
+    inset 4px 4px 10px rgba(0, 0, 0, 0.9),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.05),
+    0 1px 1px rgba(255,255,255,0.05);
+  padding: 16px;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.debossed-input:placeholder {
+  color: #444;
+}
+.debossed-input:focus {
+  box-shadow: 
+    inset 6px 6px 15px rgba(0, 0, 0, 1),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.08),
+    0 1px 1px rgba(255,255,255,0.05);
+  color: var(--color-white);
+}
+
+/* Tactile 3D Button */
+.tactile-btn {
+  background-color: var(--color-black-light);
+  color: var(--color-apricot);
+  padding: 16px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 
+    6px 6px 12px rgba(0,0,0,0.8),
+    -3px -3px 8px rgba(255,255,255,0.04),
+    inset 0px 2px 2px rgba(255,255,255,0.1);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.tactile-btn:active {
+  box-shadow: 
+    inset 4px 4px 10px rgba(0, 0, 0, 0.9),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.05);
+  transform: translateY(2px);
+}
+.tactile-btn.primary {
+  background: linear-gradient(145deg, var(--color-apricot), var(--color-apricot-dark));
+  color: var(--color-black);
+  box-shadow: 
+    6px 6px 15px rgba(204, 141, 99, 0.3),
+    -3px -3px 10px rgba(255, 255, 255, 0.05),
+    inset 0px 2px 3px rgba(255, 255, 255, 0.5);
+  border: none;
+}
+.tactile-btn.primary:active {
+  box-shadow: 
+    inset 4px 4px 10px rgba(0, 0, 0, 0.4),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.3);
+  transform: translateY(2px);
+}
+
+/* Textures & Details */
+.stitched-border {
+  /* Using dashed border to simulate stitching */
+  outline: 1px dashed rgba(255, 176, 124, 0.4);
+  outline-offset: -8px;
+}
