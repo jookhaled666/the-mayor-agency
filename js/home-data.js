@@ -109,10 +109,10 @@ window.homeHTMLDubaiEN = `
 </section>
 
 <!-- Part 4: Project Examples -->
-<section class="home-part examples-part" style="padding: 100px 10%; overflow: hidden;">
-   <h2 class="section-title" style="margin-bottom: 50px; text-align: center; font-size: 3.5rem;">Our Brands</h2>
+<section class="home-part examples-part" style="overflow: hidden;">
+   <h2 class="section-title">Our Brands</h2>
    
-   <div class="examples-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+   <div class="examples-grid">
       
       <!-- Generated 10 High-End Projects -->
       ${[
@@ -127,18 +127,18 @@ window.homeHTMLDubaiEN = `
             {name: 'Four Seasons', sub: 'Luxury Hospitality Reel', img: 'https://picsum.photos/id/1054/600/400'},
             {name: 'Cartier', sub: 'High Jewelry Exhibition', img: 'https://picsum.photos/id/1055/600/400'}
          ].map((brand, i) => `
-         <div class="project-card leather-panel" style="display: flex; flex-direction: column; overflow: hidden; border-radius: 12px; width: 100%; min-height: 400px; will-change: transform, opacity;">
-            <div class="project-image" style="height: 250px; width: 100%; overflow: hidden;">
-               <img src="${brand.img}" alt="${brand.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+         <div class="project-card leather-panel stitched-border">
+            <div class="project-image">
+               <img src="${brand.img}" alt="${brand.name}" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
-            <div style="padding: 25px;">
-               <h3 style="font-size: 1.8rem; margin-bottom: 5px; font-weight: 400;">${brand.name}</h3>
-               <p style="color: var(--color-grey); font-size: 1rem; margin-bottom: 25px;">${brand.sub}</p>
-               <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <button class="tactile-btn primary" style="font-size: 0.9rem; padding: 10px 20px;">View Case Study</button>
-                  <div style="display: flex; gap: 10px;">
-                     <button class="tactile-btn like-btn" style="padding: 8px; border-radius: 50%;"><i data-lucide="thumbs-up" style="width:16px;"></i></button>
-                     <button class="tactile-btn dislike-btn" style="padding: 8px; border-radius: 50%;"><i data-lucide="thumbs-down" style="width:16px;"></i></button>
+            <div class="project-info-padding" style="padding: 25px;">
+               <h3 class="project-title">${brand.name}</h3>
+               <p class="project-sub">${brand.sub}</p>
+               <div class="project-actions-row">
+                  <button class="tactile-btn primary">View Case Study</button>
+                  <div class="interactions">
+                     <button class="tactile-btn like-btn"><i data-lucide="thumbs-up"></i></button>
+                     <button class="tactile-btn dislike-btn"><i data-lucide="thumbs-down"></i></button>
                   </div>
                </div>
             </div>
@@ -149,13 +149,13 @@ window.homeHTMLDubaiEN = `
 </section>
 
 <!-- Part 5: Galaxy -->
-<section class="home-part projects-galaxy" style="padding: 100px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; position: relative;">
+<section class="home-part projects-galaxy" style="padding: 80px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; position: relative;">
    <div style="text-align: center; margin-bottom: 20px; z-index: 10; pointer-events: none;">
-      <h2 class="section-title" style="font-size: 3.5rem;">The Universe of The Mayor</h2>
-      <p style="color: var(--color-grey); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">Our clients exist in a constellation of luxury. Navigate through our infinite network.</p>
+      <h2 class="section-title">The Universe of The Mayor</h2>
+      <p class="galaxy-subtitle">Our clients exist in a constellation of luxury. Navigate through our infinite network.</p>
    </div>
    <!-- Complete full-width borderless galaxy! -->
-   <div id="galaxy-container" style="width: 100%; height: 100vh; position: relative; z-index: 1;">
+   <div id="galaxy-container">
      <!-- JS will inject ThreeJS canvas here -->
    </div>
 </section>

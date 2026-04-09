@@ -244,3 +244,27 @@ main.fading {
   width: 0%; height: 100%; background: var(--color-apricot); transition: width 2s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
+/* Responsive Layout */
+@media (max-width: 1024px) {
+  .header { padding: 15px 20px; }
+  .controls-container { margin-right: 20px; }
+}
+
+@media (max-width: 768px) {
+  .header { padding: 15px 15px; }
+  .logo-container { width: 100px; }
+  .controls-container { gap: 10px; margin-right: 15px; }
+  .switch span { padding: 5px 10px; font-size: 0.75rem; }
+  .hamburger { width: 30px; height: 20px; }
+  
+  .nav-links a { font-size: 2rem; letter-spacing: 2px; }
+  main { padding-top: 90px; }
+  
+  .floating-wa { width: 50px; height: 50px; right: 20px; bottom: 20px; }
+  .floating-wa i { width: 25px; height: 25px; }
+  
+  #preloader-text { font-size: 1.2rem; letter-spacing: 1px; }
+  .progress-bar { width: 200px; }
+  .map-icon { width: 50px; height: 50px; }
+}
+
