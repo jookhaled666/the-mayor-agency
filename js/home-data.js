@@ -117,20 +117,20 @@ window.homeHTMLDubaiEN = `
          
          <!-- Generated 10 High-End Projects -->
          ${[
-            {name: 'Maserati', sub: 'Global Launch Campaign', img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=400'},
-            {name: 'Rolex', sub: 'VIP Equestrian Event', img: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=400'},
-            {name: 'Emaar', sub: 'Real Estate Video Production', img: 'https://images.unsplash.com/photo-1542314831-c6a4d14d8373?auto=format&fit=crop&w=400'},
-            {name: 'Vogue Arabia', sub: 'Cover Editorial Shoot', img: 'https://images.unsplash.com/photo-1510414343163-f222d425c282?auto=format&fit=crop&w=400'},
-            {name: 'Bvlgari', sub: 'Exclusive Gala Dinner', img: 'https://images.unsplash.com/photo-1599812959828-ea2444053cd5?auto=format&fit=crop&w=400'},
-            {name: 'Chanel', sub: 'Influencer Seeding PR', img: 'https://images.unsplash.com/photo-1574345097446-fae56da3fa15?auto=format&fit=crop&w=400'},
-            {name: 'Emirates', sub: 'Aviation Commercial', img: 'https://images.unsplash.com/photo-1522093537031-3ee9eb53c0ce?auto=format&fit=crop&w=400'},
-            {name: 'Mashreq', sub: 'Digital Banking Promo', img: 'https://images.unsplash.com/photo-1501167783359-54379fd6ec36?auto=format&fit=crop&w=400'},
-            {name: 'Four Seasons', sub: 'Luxury Hospitality Reel', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400'},
-            {name: 'Cartier', sub: 'High Jewelry Exhibition', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=400'}
+            {name: 'Maserati', sub: 'Global Launch Campaign', img: 'https://picsum.photos/id/1071/600/400'},
+            {name: 'Rolex', sub: 'VIP Equestrian Event', img: 'https://picsum.photos/id/1072/600/400'},
+            {name: 'Emaar', sub: 'Real Estate Video Production', img: 'https://picsum.photos/id/1043/600/400'},
+            {name: 'Vogue Arabia', sub: 'Cover Editorial Shoot', img: 'https://picsum.photos/id/1044/600/400'},
+            {name: 'Bvlgari', sub: 'Exclusive Gala Dinner', img: 'https://picsum.photos/id/1045/600/400'},
+            {name: 'Chanel', sub: 'Influencer Seeding PR', img: 'https://picsum.photos/id/1050/600/400'},
+            {name: 'Emirates', sub: 'Aviation Commercial', img: 'https://picsum.photos/id/1051/600/400'},
+            {name: 'Mashreq', sub: 'Digital Banking Promo', img: 'https://picsum.photos/id/1053/600/400'},
+            {name: 'Four Seasons', sub: 'Luxury Hospitality Reel', img: 'https://picsum.photos/id/1054/600/400'},
+            {name: 'Cartier', sub: 'High Jewelry Exhibition', img: 'https://picsum.photos/id/1055/600/400'}
          ].map((brand, i) => `
          <div class="project-card leather-panel" style="display: flex; flex-direction: column; overflow: hidden; border-radius: 12px; width: 30vw; min-width: 350px;">
             <div class="project-image" style="height: 250px; width: 100%; overflow: hidden;">
-               <img src="${brand.img}" alt="${brand.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" />
+               <img src="${brand.img}" alt="${brand.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
             <div style="padding: 25px;">
                <h3 style="font-size: 1.8rem; margin-bottom: 5px;">${brand.name}</h3>

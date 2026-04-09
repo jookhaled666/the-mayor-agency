@@ -230,17 +230,15 @@ function initPageAnimations(pageKey) {
     const brandsViewport = document.querySelector('.horizontal-scroll-viewport');
     const brandsTrack = document.querySelector('.examples-grid-horizontal');
     if (brandsTrack && brandsViewport) {
-       // Stop the track from moving normally, we pin the section and slide the track
-       // Calculate how far to move: total width of track minus width of viewport
+       // Slow down scroll by increasing the 'end' ratio and making scrub higher
        gsap.to(brandsTrack, {
-          x: () => -(brandsTrack.scrollWidth - window.innerWidth),
+          x: () => -(brandsTrack.scrollWidth - window.innerWidth + 100), // add 100px padding
           ease: "none",
           scrollTrigger: {
              trigger: ".examples-part",
              pin: true,
-             scrub: 1,
-             // The scroll distance depends on the track width, giving it exactly enough time to scroll 
-             end: () => "+=" + (brandsTrack.scrollWidth - window.innerWidth)
+             scrub: 2.5, // Extremely smooth and slightly delayed trail matching a relaxed luxury feel
+             end: () => "+=" + (brandsTrack.scrollWidth * 1.5) // Longer scroll area = slower transition
           }
        });
     }
