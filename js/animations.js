@@ -226,25 +226,23 @@ function initPageAnimations(pageKey) {
       tl.to({}, { duration: 0.2 });
     }
 
-    // Add professional stagger effect to the new 10 Project/Brand cards
-    const projectCards = document.querySelectorAll('.project-card');
-    if (projectCards.length > 0) {
-      gsap.fromTo(projectCards, 
-        { y: 100, opacity: 0, scale: 0.9, rotationX: 15 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          rotationX: 0,
-          stagger: 0.1,
-          duration: 1,
-          ease: 'back.out(1.2)',
+    // Cinematic Horizontal Scroll for "Our Brands"
+    const brandsViewport = document.querySelector('.horizontal-scroll-viewport');
+    const brandsTrack = document.querySelector('.examples-grid-horizontal');
+    if (brandsTrack && brandsViewport) {
+       // Stop the track from moving normally, we pin the section and slide the track
+       // Calculate how far to move: total width of track minus width of viewport
+       gsap.to(brandsTrack, {
+          x: () => -(brandsTrack.scrollWidth - window.innerWidth),
+          ease: "none",
           scrollTrigger: {
-            trigger: '.examples-grid',
-            start: 'top 85%'
+             trigger: ".examples-part",
+             pin: true,
+             scrub: 1,
+             // The scroll distance depends on the track width, giving it exactly enough time to scroll 
+             end: () => "+=" + (brandsTrack.scrollWidth - window.innerWidth)
           }
-        }
-      );
+       });
     }
 
     // Standard Entrance animations for other general elements

@@ -106,56 +106,56 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
        const brandNames = ["Samsonite", "ANKER", "BINGHATTI", "Mashreq", "The Mayor"];
        particles = new THREE.Group();
        
-       for (let i = 0; i < 120; i++) {
+       for (let i = 0; i < 150; i++) {
            const canvas = document.createElement('canvas');
            // High-resolution canvas for crisp text
-           canvas.width = 512;
-           canvas.height = 128;
+           canvas.width = 300;
+           canvas.height = 80;
            const context = canvas.getContext('2d');
            // Transparent background
            context.fillStyle = 'rgba(0,0,0,0)';
-           context.fillRect(0, 0, 512, 128);
+           context.fillRect(0, 0, 300, 80);
            
-           // Luxury Typography
-           context.font = 'bold 55px "Outfit", sans-serif';
+           // Chic, smaller elegant typography
+           context.font = '30px "Helvetica Neue", sans-serif'; // Removed bold, made it sleek
            context.textAlign = 'center';
            context.textBaseline = 'middle';
+           context.letterSpacing = '5px'; // Chic spacing
            
-           // Glow effect
+           // Soft glow effect
            context.shadowColor = '#ffb07c';
-           context.shadowBlur = 15;
-           context.fillStyle = '#ffffff';
+           context.shadowBlur = 8;
+           context.fillStyle = 'rgba(255, 255, 255, 0.85)';
            
            const text = brandNames[Math.floor(Math.random() * brandNames.length)];
-           context.fillText(text, 256, 64);
+           context.fillText(text, 150, 40);
            
            const texture = new THREE.CanvasTexture(canvas);
-           // Improve texture filtering for text
            texture.minFilter = THREE.LinearFilter;
            
            const material = new THREE.SpriteMaterial({ 
                map: texture,
                color: 0xffffff,
                transparent: true, 
-               opacity: 0.95,
+               opacity: 0.7,
                depthWrite: false,
                blending: THREE.AdditiveBlending 
            });
            
            const sprite = new THREE.Sprite(material);
            
-           // Spherical distribution closer to the camera to ensure clarity
-           const r = 100 + Math.random() * 250;
+           // Spread them elegantly
+           const r = 150 + Math.random() * 400;
            const theta = Math.random() * 2 * Math.PI;
            const phi = Math.acos(2 * Math.random() - 1);
            
            sprite.position.x = r * Math.sin(phi) * Math.cos(theta);
-           sprite.position.y = (r * Math.sin(phi) * Math.sin(theta)) * 0.4; // Galaxy disk 
+           sprite.position.y = (r * Math.sin(phi) * Math.sin(theta)) * 0.3; // Much flatter disk
            sprite.position.z = r * Math.cos(phi);
            
-           // Make the logo size match the 4:1 aspect ratio of the canvas
-           const baseScale = 15 + Math.random() * 15;
-           sprite.scale.set(baseScale * 4, baseScale, 1);
+           // Much smaller size for elegance 
+           const baseScale = 5 + Math.random() * 10;
+           sprite.scale.set(baseScale * 3.75, baseScale, 1); // Respecting the 300x80 ratio roughly
            
            particles.add(sprite);
        }
@@ -169,16 +169,15 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
 function animateGalaxy() {
     requestAnimationFrame(animateGalaxy);
     if(particles) {
-        // Core slow rotation
-        particles.rotation.y += 0.001;
-        particles.rotation.x += 0.0005;
+        // Core rotation (slower, chic, calm)
+        particles.rotation.y += 0.0003;
+        particles.rotation.x += 0.0001;
         
-        // Dynamic smooth tracking of mouse using GSAP quickTo or simple lerp
-        // mouseX and mouseY are globals tracked by three-scene.js (from Earth logic)
+        // Gentle tracking of mouse
         gsap.to(particles.rotation, {
-           x: mouseY * 0.4,
-           y: mouseX * 0.4,
-           duration: 2,
+           x: mouseY * 0.2,
+           y: mouseX * 0.2,
+           duration: 3,
            ease: 'power2.out'
         });
     }
