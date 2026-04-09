@@ -179,7 +179,8 @@ function initPageAnimations(pageKey) {
       });
     }
 
-    // 3. Cinematic Brand Classes Slide in (Now Tumble Scrub)
+    // 3. Cinematic Brand Classes Slide in
+    const isMobile = window.innerWidth <= 768;
     const classCards = document.querySelectorAll('.class-card');
     classCards.forEach(card => {
        const tl = gsap.timeline({
@@ -190,8 +191,15 @@ function initPageAnimations(pageKey) {
            scrub: true
          }
        });
-       tl.fromTo(card, { rotateX: 60, y: 100, opacity: 0, scale: 0.8 }, { rotateX: 0, y: 0, opacity: 1, scale: 1, duration: 1 })
-         .to(card, { rotateX: -60, y: -100, opacity: 0, scale: 0.8, duration: 1 });
+       if (isMobile) {
+         // Smooth, lag-free premium fade and scale for mobile (avoids 3D clipping)
+         tl.fromTo(card, { y: 50, opacity: 0.2, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 1 })
+           .to(card, { y: -50, opacity: 0.2, scale: 0.95, duration: 1 });
+       } else {
+         // Full 3D Tumble Scrub for Desktop
+         tl.fromTo(card, { rotateX: 60, y: 100, opacity: 0, scale: 0.8 }, { rotateX: 0, y: 0, opacity: 1, scale: 1, duration: 1 })
+           .to(card, { rotateX: -60, y: -100, opacity: 0, scale: 0.8, duration: 1 });
+       }
     });
 
     // 4. Flip Services Cards (Scrubbing)

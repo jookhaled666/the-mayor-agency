@@ -108,27 +108,27 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
        
        for (let i = 0; i < 150; i++) {
            const canvas = document.createElement('canvas');
-           // High-resolution canvas for crisp text
-           canvas.width = 300;
-           canvas.height = 80;
+           // High-resolution canvas for crisp Retina text on mobile
+           canvas.width = 600;
+           canvas.height = 160;
            const context = canvas.getContext('2d');
            // Transparent background
            context.fillStyle = 'rgba(0,0,0,0)';
-           context.fillRect(0, 0, 300, 80);
+           context.fillRect(0, 0, 600, 160);
            
-           // Chic, smaller elegant typography
-           context.font = '30px "Helvetica Neue", sans-serif'; // Removed bold, made it sleek
+           // Chic, ultra crisp typography
+           context.font = '60px "Helvetica Neue", sans-serif'; // Doubled size
            context.textAlign = 'center';
            context.textBaseline = 'middle';
-           context.letterSpacing = '5px'; // Chic spacing
+           context.letterSpacing = '10px'; // Chic spacing doubled
            
            // Soft glow effect
            context.shadowColor = '#ffb07c';
-           context.shadowBlur = 8;
-           context.fillStyle = 'rgba(255, 255, 255, 0.85)';
+           context.shadowBlur = 15;
+           context.fillStyle = 'rgba(255, 255, 255, 0.95)';
            
            const text = brandNames[Math.floor(Math.random() * brandNames.length)];
-           context.fillText(text, 150, 40);
+           context.fillText(text, 300, 80);
            
            const texture = new THREE.CanvasTexture(canvas);
            texture.minFilter = THREE.LinearFilter;
