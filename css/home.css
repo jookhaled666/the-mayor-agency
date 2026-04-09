@@ -155,8 +155,8 @@
 
 /* Part 3: Flip Services */
 .flip-services-part {
-  height: 300vh; /* Extremely tall to allow scrolling through cards */
   padding: 0;
+  /* GSAP ScrollTrigger automatically calculates and adds padding (pinSpacing) so we no longer need a hardcoded height which caused the blank void! */
 }
 
 .flip-container-sticky {

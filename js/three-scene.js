@@ -102,56 +102,60 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
        galaxyRenderer.setSize(container.clientWidth, container.clientHeight);
        container.appendChild(galaxyRenderer.domElement);
        
-       const textureLoader = new THREE.TextureLoader();
-       const logoUrls = [
-         './assets/logos/1.png',
-         './assets/logos/2.png',
-         './assets/logos/3.png',
-         './assets/logos/4.png',
-         './assets/logos/5.png'
-       ];
-       
-       const textures = logoUrls.map(url => textureLoader.load(url));
+       // Generate luxurious text-based logos directly via Canvas to completely bypass Local File (CORS) security errors in WebGL!
+       const brandNames = ["Samsonite", "ANKER", "BINGHATTI", "Mashreq", "The Mayor"];
        particles = new THREE.Group();
        
-       // Add deep background star dust to make it feel like a real deep galaxy
-       const dustGeo = new THREE.BufferGeometry();
-       const dustVerts = [];
-       for(let i=0; i<3000; i++) {
-           dustVerts.push(THREE.MathUtils.randFloatSpread(800), THREE.MathUtils.randFloatSpread(800), THREE.MathUtils.randFloatSpread(800));
-       }
-       dustGeo.setAttribute('position', new THREE.Float32BufferAttribute(dustVerts, 3));
-       const dustMat = new THREE.PointsMaterial({ color: 0xffb07c, size: 1.5, transparent: true, opacity: 0.4 });
-       const dust = new THREE.Points(dustGeo, dustMat);
-       particles.add(dust);
-
-       // Format Logos
-       for (let i = 0; i < 80; i++) {
-           const selectedTexture = textures[Math.floor(Math.random() * textures.length)];
+       for (let i = 0; i < 120; i++) {
+           const canvas = document.createElement('canvas');
+           // High-resolution canvas for crisp text
+           canvas.width = 512;
+           canvas.height = 128;
+           const context = canvas.getContext('2d');
+           // Transparent background
+           context.fillStyle = 'rgba(0,0,0,0)';
+           context.fillRect(0, 0, 512, 128);
+           
+           // Luxury Typography
+           context.font = 'bold 55px "Outfit", sans-serif';
+           context.textAlign = 'center';
+           context.textBaseline = 'middle';
+           
+           // Glow effect
+           context.shadowColor = '#ffb07c';
+           context.shadowBlur = 15;
+           context.fillStyle = '#ffffff';
+           
+           const text = brandNames[Math.floor(Math.random() * brandNames.length)];
+           context.fillText(text, 256, 64);
+           
+           const texture = new THREE.CanvasTexture(canvas);
+           // Improve texture filtering for text
+           texture.minFilter = THREE.LinearFilter;
            
            const material = new THREE.SpriteMaterial({ 
-               map: selectedTexture,
+               map: texture,
                color: 0xffffff,
                transparent: true, 
                opacity: 0.95,
                depthWrite: false,
-               blending: THREE.AdditiveBlending // makes it glow slightly if the logo is light
+               blending: THREE.AdditiveBlending 
            });
            
            const sprite = new THREE.Sprite(material);
            
            // Spherical distribution closer to the camera to ensure clarity
-           const r = 150 + Math.random() * 200;
+           const r = 100 + Math.random() * 250;
            const theta = Math.random() * 2 * Math.PI;
            const phi = Math.acos(2 * Math.random() - 1);
            
            sprite.position.x = r * Math.sin(phi) * Math.cos(theta);
-           sprite.position.y = (r * Math.sin(phi) * Math.sin(theta)) * 0.5; // flatten slightly like a galaxy disk
+           sprite.position.y = (r * Math.sin(phi) * Math.sin(theta)) * 0.4; // Galaxy disk 
            sprite.position.z = r * Math.cos(phi);
            
-           // Make the logo size bigger and more readable
-           const baseScale = 40 + Math.random() * 40;
-           sprite.scale.set(baseScale * 1.5, baseScale, 1);
+           // Make the logo size match the 4:1 aspect ratio of the canvas
+           const baseScale = 15 + Math.random() * 15;
+           sprite.scale.set(baseScale * 4, baseScale, 1);
            
            particles.add(sprite);
        }
