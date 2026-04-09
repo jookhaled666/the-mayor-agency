@@ -1,39 +1,11 @@
 const pageData = {
   home_dubai: {
-    en: {
-      html: `
-        <section class="home-hero" style="min-height: 80vh; display: flex; align-items: center;">
-          <div class="hero-content" style="padding: 0 10%; width: 100%;">
-            <h1 class="hero-title" style="font-size: 5rem; max-width: 800px; line-height: 1.1; margin-bottom: 2rem;">FORGING ELITE LEGACIES IN DUBAI</h1>
-            <p class="hero-subtitle" style="font-size: 1.5rem; color: var(--color-grey); max-width: 600px; margin-bottom: 3rem;">We are the premier luxury media agency bridging the cultures of the Middle East, setting the gold standard in production.</p>
-            
-            <div class="video-placeholder leather-panel stitched-border" style="width: 100%; height: 50vh; display:flex; justify-content:center; align-items:center; cursor: pointer;">
-              <i data-lucide="play-circle" style="width: 64px; height: 64px; color: var(--color-apricot);"></i>
-              <span style="margin-left: 20px; font-size: 1.2rem; color: var(--color-grey);">Cinematic Reel Placeholder</span>
-            </div>
-            
-            <button class="tactile-btn primary" style="margin-top: 3rem;">Discover The Mayor</button>
-          </div>
-        </section>
-      `
-    }
+    en: { html: window.homeHTMLDubaiEN },
+    ar: { html: window.homeHTMLDubaiEN } // Arabic translation pending
   },
   home_egypt: {
-    en: {
-      html: `
-        <section class="home-hero" style="min-height: 80vh; display: flex; align-items: center;">
-          <div class="hero-content" style="padding: 0 10%; width: 100%;">
-            <h1 class="hero-title" style="font-size: 5rem; max-width: 800px; line-height: 1.1; margin-bottom: 2rem;">HIGH-VOLUME PRODUCTION IN EGYPT</h1>
-            <p class="hero-subtitle" style="font-size: 1.5rem; color: var(--color-grey); max-width: 600px; margin-bottom: 3rem;">Delivering world-class production capabilities with a premium standard across North Africa.</p>
-            
-            <div class="video-placeholder leather-panel stitched-border" style="width: 100%; height: 50vh; display:flex; justify-content:center; align-items:center;">
-              <i data-lucide="film" style="width: 64px; height: 64px; color: var(--color-apricot);"></i>
-              <span style="margin-left: 20px; font-size: 1.2rem; color: var(--color-grey);">Egypt High-Volume Reel</span>
-            </div>
-          </div>
-        </section>
-      `
-    }
+    en: { html: window.homeHTMLEgyptEN },
+    ar: { html: window.homeHTMLEgyptEN }
   },
   services: {
     en: {

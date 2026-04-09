@@ -7,7 +7,15 @@
   --color-white: #f5f5f7;
   --color-grey: #a1a1a6;
   
-  --font-primary: 'Outfit', sans-serif;
+  /* Fallback in case Hanoble isn't loaded yet. Make sure you load the original Hanoble font file via @font-face if it's a custom font */
+  --font-primary: 'Hanoble', 'Outfit', sans-serif;
+}
+
+/* Base custom font declaration (Needs real font file later) */
+@font-face {
+  font-family: 'Hanoble';
+  src: local('Hanoble');
+  font-display: swap;
 }
 
 * {

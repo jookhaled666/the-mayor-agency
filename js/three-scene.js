@@ -87,3 +87,52 @@ function transitionEarth(region) {
     targetRotationX = 0.1;
   }
 }
+
+// Custom Galaxy Scene for Home Part 5
+let galaxyScene, galaxyCamera, galaxyRenderer, particles;
+
+document.addEventListener('HOME_PAGE_RENDERED', () => {
+    const container = document.getElementById('galaxy-container');
+    if (container && !galaxyRenderer) {
+       galaxyScene = new THREE.Scene();
+       galaxyCamera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+       galaxyCamera.position.z = 200;
+       
+       galaxyRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+       galaxyRenderer.setSize(container.clientWidth, container.clientHeight);
+       container.appendChild(galaxyRenderer.domElement);
+       
+       const geometry = new THREE.BufferGeometry();
+       const vertices = [];
+       for (let i = 0; i < 2500; i++) {
+           const x = THREE.MathUtils.randFloatSpread(500);
+           const y = THREE.MathUtils.randFloatSpread(500);
+           const z = THREE.MathUtils.randFloatSpread(500);
+           vertices.push(x, y, z);
+       }
+       geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+       
+       const material = new THREE.PointsMaterial({
+           color: 0xffb07c,
+           size: 1.5,
+           transparent: true,
+           opacity: 0.8
+       });
+       
+       particles = new THREE.Points(geometry, material);
+       galaxyScene.add(particles);
+       
+       animateGalaxy();
+    }
+});
+
+function animateGalaxy() {
+    requestAnimationFrame(animateGalaxy);
+    if(particles) {
+        particles.rotation.y += 0.001;
+        particles.rotation.x += 0.0005;
+    }
+    if(galaxyRenderer && galaxyScene && galaxyCamera) {
+       galaxyRenderer.render(galaxyScene, galaxyCamera);
+    }
+}

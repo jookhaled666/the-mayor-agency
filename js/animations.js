@@ -133,10 +133,103 @@ function initPageAnimations(pageKey) {
        }
     }
 
-    // Standard Entrance animations for cards
-    const cards = document.querySelectorAll('.service-card, .timeline-item, .info-block');
-    if (cards.length > 0) {
-      gsap.fromTo(cards, 
+    // 1. Auto Typing Hook
+    const hookObj = document.querySelector('.typing-hook');
+    if (hookObj) {
+      const text = hookObj.getAttribute('data-text');
+      hookObj.innerText = '';
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          hookObj.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50 + Math.random() * 50); // Smooth random typing
+        }
+      }
+      setTimeout(typeWriter, 500); // delay start by 500ms
+    }
+
+    // 2. Counters Pop-up and Increment
+    const counterCards = document.querySelectorAll('.counter-card');
+    if (counterCards.length > 0) {
+      gsap.to(counterCards, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: '.counters-grid',
+          start: 'top 80%',
+          onEnter: () => {
+            document.querySelectorAll('.counter-number').forEach(num => {
+              const target = parseInt(num.getAttribute('data-target'));
+              gsap.to(num, {
+                innerText: target,
+                duration: 2,
+                snap: { innerText: 1 },
+                ease: 'power2.out',
+                onUpdate: function() {
+                  num.innerText = Math.ceil(this.targets()[0].innerText);
+                }
+              });
+            });
+          }
+        }
+      });
+    }
+
+    // 3. Cinematic Brand Classes Slide in
+    const classCards = document.querySelectorAll('.class-card');
+    classCards.forEach(card => {
+       gsap.to(card, {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          }
+       });
+    });
+
+    // 4. Flip Services Cards (Scrubbing)
+    const flipCards = document.querySelectorAll('.flip-card');
+    if (flipCards.length > 0) {
+      const tl = gsap.timeline({
+         scrollTrigger: {
+            trigger: '.flip-services-part',
+            start: 'top top',
+            end: '+=200%',    // Amount of scrolling space
+            scrub: 1,         // Smooth scrubbing
+            pin: true
+         }
+      });
+      // Sequence: each card flips in (rotateX 0, opacity 1) then fades out slightly as next comes in
+      flipCards.forEach((card, index) => {
+         tl.to(card, {
+            rotateX: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power1.inOut'
+         }, index); // Absolute timing overlaps them sequentially
+         
+         // If it's not the last card, push it back when the next one appears
+         if (index < flipCards.length - 1) {
+            tl.to(card, {
+               scale: 0.9,
+               opacity: 0,
+               duration: 0.5
+            }, index + 0.8); 
+         }
+      });
+    }
+
+    // Standard Entrance animations for other general cards
+    const generalCards = document.querySelectorAll('.service-card, .timeline-item, .info-block, .project-card');
+    if (generalCards.length > 0) {
+      gsap.fromTo(generalCards, 
         { y: 50, opacity: 0 },
         {
           y: 0,
@@ -145,12 +238,33 @@ function initPageAnimations(pageKey) {
           duration: 0.8,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: cards[0],
+            trigger: generalCards[0],
             start: 'top 85%'
           }
         }
       );
     }
+
+    // Like buttons interaction
+    document.querySelectorAll('.like-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+         gsap.to(this.querySelector('i'), { scale: 1.5, color: '#ffb07c', duration: 0.2, yoyo: true, repeat: 1 });
+         this.style.borderColor = '#ffb07c';
+      });
+    });
+    document.querySelectorAll('.dislike-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+         gsap.to(this.querySelector('i'), { scale: 1.5, color: '#ff4444', duration: 0.2, yoyo: true, repeat: 1 });
+         this.style.borderColor = '#ff4444';
+      });
+    });
+
+    // Notify Three.js scene to render Galaxy if on home page
+    if (pageKey === 'home_dubai' || pageKey === 'home_egypt') {
+       // Optional: We can dispatch an event to three-scene.js
+       document.dispatchEvent(new CustomEvent('HOME_PAGE_RENDERED'));
+    }
+
   }, 100);
 }
 
