@@ -1,4 +1,4 @@
-export const pageData = {
+const pageData = {
   home_dubai: {
     en: {
       html: `

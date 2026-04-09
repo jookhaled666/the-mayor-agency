@@ -1,6 +1,6 @@
-export let lenis;
+let lenis;
 
-export function initLenis() {
+function initLenis() {
   lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
@@ -22,7 +22,7 @@ export function initLenis() {
   gsap.ticker.lagSmoothing(0);
 }
 
-export function initGlobalAnimations() {
+function initGlobalAnimations() {
   const hamburger = document.getElementById('nav-toggle');
   const fullscreenNav = document.getElementById('fullscreen-nav');
   const navLinks = document.querySelectorAll('.nav-links a');
@@ -96,7 +96,7 @@ export function initGlobalAnimations() {
   });
 }
 
-export function initPageAnimations(pageKey) {
+function initPageAnimations(pageKey) {
   // Clear any existing scroll triggers from previous page
   ScrollTrigger.getAll().forEach(t => t.kill());
 
@@ -154,7 +154,7 @@ export function initPageAnimations(pageKey) {
   }, 100);
 }
 
-export function fadeOutView(onComplete) {
+function fadeOutView(onComplete) {
   const appView = document.getElementById('app-view');
   gsap.to(appView, {
     opacity: 0, 

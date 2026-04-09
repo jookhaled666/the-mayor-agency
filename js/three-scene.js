@@ -4,7 +4,7 @@ let targetRotationY = 0;
 let mouseX = 0;
 let mouseY = 0;
 
-export function initThreeScene() {
+function initThreeScene() {
   const canvas = document.getElementById('earth-canvas');
   scene = new THREE.Scene();
   
@@ -74,7 +74,7 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-export function transitionEarth(region) {
+function transitionEarth(region) {
   // Cinematic zoom out and rotate
   gsap.to(camera.position, { z: 7.5, duration: 0.8, ease: "power2.inOut", yoyo: true, repeat: 1 });
   
