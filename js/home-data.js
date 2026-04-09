@@ -109,14 +109,13 @@ window.homeHTMLDubaiEN = `
 </section>
 
 <!-- Part 4: Project Examples -->
-<section class="home-part examples-part" style="padding: 100px 0; overflow: hidden;">
+<section class="home-part examples-part" style="padding: 100px 10%; overflow: hidden;">
    <h2 class="section-title" style="margin-bottom: 50px; text-align: center; font-size: 3.5rem;">Our Brands</h2>
    
-   <div class="horizontal-scroll-viewport" style="width: 100%; overflow: hidden;">
-      <div class="examples-grid-horizontal" style="display: flex; gap: 40px; padding: 0 5vw; width: max-content;">
-         
-         <!-- Generated 10 High-End Projects -->
-         ${[
+   <div class="examples-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+      
+      <!-- Generated 10 High-End Projects -->
+      ${[
             {name: 'Maserati', sub: 'Global Launch Campaign', img: 'https://picsum.photos/id/1071/600/400'},
             {name: 'Rolex', sub: 'VIP Equestrian Event', img: 'https://picsum.photos/id/1072/600/400'},
             {name: 'Emaar', sub: 'Real Estate Video Production', img: 'https://picsum.photos/id/1043/600/400'},
@@ -128,12 +127,12 @@ window.homeHTMLDubaiEN = `
             {name: 'Four Seasons', sub: 'Luxury Hospitality Reel', img: 'https://picsum.photos/id/1054/600/400'},
             {name: 'Cartier', sub: 'High Jewelry Exhibition', img: 'https://picsum.photos/id/1055/600/400'}
          ].map((brand, i) => `
-         <div class="project-card leather-panel" style="display: flex; flex-direction: column; overflow: hidden; border-radius: 12px; width: 30vw; min-width: 350px;">
+         <div class="project-card leather-panel" style="display: flex; flex-direction: column; overflow: hidden; border-radius: 12px; width: 100%; min-height: 400px; will-change: transform, opacity;">
             <div class="project-image" style="height: 250px; width: 100%; overflow: hidden;">
                <img src="${brand.img}" alt="${brand.name}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
             </div>
             <div style="padding: 25px;">
-               <h3 style="font-size: 1.8rem; margin-bottom: 5px;">${brand.name}</h3>
+               <h3 style="font-size: 1.8rem; margin-bottom: 5px; font-weight: 400;">${brand.name}</h3>
                <p style="color: var(--color-grey); font-size: 1rem; margin-bottom: 25px;">${brand.sub}</p>
                <div style="display: flex; justify-content: space-between; align-items: center;">
                   <button class="tactile-btn primary" style="font-size: 0.9rem; padding: 10px 20px;">View Case Study</button>
@@ -146,7 +145,6 @@ window.homeHTMLDubaiEN = `
          </div>
          `).join('')}
 
-      </div>
    </div>
 </section>
 

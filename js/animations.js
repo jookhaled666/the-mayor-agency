@@ -226,20 +226,25 @@ function initPageAnimations(pageKey) {
       tl.to({}, { duration: 0.2 });
     }
 
-    // Cinematic Horizontal Scroll for "Our Brands"
-    const brandsViewport = document.querySelector('.horizontal-scroll-viewport');
-    const brandsTrack = document.querySelector('.examples-grid-horizontal');
-    if (brandsTrack && brandsViewport) {
-       // Slow down scroll by increasing the 'end' ratio and making scrub higher
-       gsap.to(brandsTrack, {
-          x: () => -(brandsTrack.scrollWidth - window.innerWidth + 100), // add 100px padding
-          ease: "none",
-          scrollTrigger: {
-             trigger: ".examples-part",
-             pin: true,
-             scrub: 2.5, // Extremely smooth and slightly delayed trail matching a relaxed luxury feel
-             end: () => "+=" + (brandsTrack.scrollWidth * 1.5) // Longer scroll area = slower transition
-          }
+    // Cinematic Card-by-Card native stagger (Zero Lag, perfectly smooth)
+    const projectCards = document.querySelectorAll('.project-card');
+    if (projectCards.length > 0) {
+       projectCards.forEach((card) => {
+          gsap.fromTo(card,
+            { y: 70, opacity: 0, scale: 0.95 },
+            {
+               y: 0, 
+               opacity: 1, 
+               scale: 1, 
+               duration: 1.2, 
+               ease: 'power3.out',
+               scrollTrigger: {
+                 trigger: card,
+                 start: 'top 85%',
+                 once: true
+               }
+            }
+          );
        });
     }
 
