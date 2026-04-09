@@ -361,7 +361,7 @@
   .interactions { justify-content: center; }
   
   /* Galaxy */
-  #galaxy-container { height: 60vh; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;}
+  #galaxy-container { height: 60vh; width: 100%; position: relative; margin: 0; left: 0; right: 0; }
   .galaxy-subtitle { font-size: 1rem !important; padding: 0 15px; }
   
   /* Footer */
