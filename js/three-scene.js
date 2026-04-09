@@ -102,31 +102,28 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
        galaxyRenderer.setSize(container.clientWidth, container.clientHeight);
        container.appendChild(galaxyRenderer.domElement);
        
-       const brandNames = ["GUCCI", "PRADA", "ROLEX", "CHANEL", "DIOR", "BMW", "SAMSUNG", "APPLE", "LOUIS VUITTON", "PORSCHE", "AMAZON", "NETFLIX", "CARTIER", "HERMES", "BENTLEY"];
+       const textureLoader = new THREE.TextureLoader();
+       const logoUrls = [
+         './assets/logos/1.png',
+         './assets/logos/2.png',
+         './assets/logos/3.png',
+         './assets/logos/4.png',
+         './assets/logos/5.png'
+       ];
+       
+       const textures = logoUrls.map(url => textureLoader.load(url));
        particles = new THREE.Group();
        
-       for (let i = 0; i < 150; i++) {
-           const canvas = document.createElement('canvas');
-           canvas.width = 256;
-           canvas.height = 64;
-           const context = canvas.getContext('2d');
-           context.fillStyle = 'rgba(0,0,0,0)';
-           context.fillRect(0, 0, 256, 64);
+       for (let i = 0; i < 100; i++) {
+           const selectedTexture = textures[Math.floor(Math.random() * textures.length)];
            
-           context.font = 'bold 36px sans-serif';
-           context.textAlign = 'center';
-           context.textBaseline = 'middle';
+           const material = new THREE.SpriteMaterial({ 
+               map: selectedTexture, 
+               transparent: true, 
+               opacity: 0.9,
+               depthWrite: false 
+           });
            
-           context.fillStyle = '#ffb07c';
-           const text = brandNames[Math.floor(Math.random() * brandNames.length)];
-           context.fillText(text, 128, 32);
-           
-           context.strokeStyle = 'rgba(255, 176, 124, 0.4)';
-           context.lineWidth = 2;
-           context.strokeRect(5, 5, 246, 54);
-
-           const texture = new THREE.CanvasTexture(canvas);
-           const material = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.9 });
            const sprite = new THREE.Sprite(material);
            
            const r = 250 + Math.random() * 200;
@@ -137,7 +134,9 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
            sprite.position.y = r * Math.sin(phi) * Math.sin(theta);
            sprite.position.z = r * Math.cos(phi);
            
-           sprite.scale.set(40, 10, 1);
+           const baseScale = 25 + Math.random() * 25;
+           sprite.scale.set(baseScale * 1.5, baseScale, 1);
+           
            particles.add(sprite);
        }
        
