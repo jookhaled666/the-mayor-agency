@@ -213,17 +213,17 @@ function initPageAnimations(pageKey) {
             opacity: 1,
             duration: 1,
             ease: 'power1.inOut'
-         }, index); // Absolute timing overlaps them sequentially
+         }, index); 
          
-         // If it's not the last card, push it back when the next one appears
-         if (index < flipCards.length - 1) {
-            tl.to(card, {
-               scale: 0.9,
-               opacity: 0,
-               duration: 0.5
-            }, index + 0.8); 
-         }
+         // Every card (including the last one) fades out and scales down at the end of its view time
+         tl.to(card, {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.8
+         }, index + 0.8); 
       });
+      // Add empty space at the end of timeline for smooth release to next section
+      tl.to({}, { duration: 0.2 });
     }
 
     // Standard Entrance animations for other general cards

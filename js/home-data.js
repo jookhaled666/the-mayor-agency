@@ -110,7 +110,7 @@ window.homeHTMLDubaiEN = `
 
 <!-- Part 4: Project Examples -->
 <section class="home-part examples-part">
-   <h2 class="section-title">Case Studies</h2>
+   <h2 class="section-title">Our Brands</h2>
    <div class="examples-grid">
       <!-- 1 -->
       <div class="project-card leather-panel">

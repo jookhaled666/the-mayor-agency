@@ -114,27 +114,43 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
        const textures = logoUrls.map(url => textureLoader.load(url));
        particles = new THREE.Group();
        
-       for (let i = 0; i < 100; i++) {
+       // Add deep background star dust to make it feel like a real deep galaxy
+       const dustGeo = new THREE.BufferGeometry();
+       const dustVerts = [];
+       for(let i=0; i<3000; i++) {
+           dustVerts.push(THREE.MathUtils.randFloatSpread(800), THREE.MathUtils.randFloatSpread(800), THREE.MathUtils.randFloatSpread(800));
+       }
+       dustGeo.setAttribute('position', new THREE.Float32BufferAttribute(dustVerts, 3));
+       const dustMat = new THREE.PointsMaterial({ color: 0xffb07c, size: 1.5, transparent: true, opacity: 0.4 });
+       const dust = new THREE.Points(dustGeo, dustMat);
+       particles.add(dust);
+
+       // Format Logos
+       for (let i = 0; i < 80; i++) {
            const selectedTexture = textures[Math.floor(Math.random() * textures.length)];
            
            const material = new THREE.SpriteMaterial({ 
-               map: selectedTexture, 
+               map: selectedTexture,
+               color: 0xffffff,
                transparent: true, 
-               opacity: 0.9,
-               depthWrite: false 
+               opacity: 0.95,
+               depthWrite: false,
+               blending: THREE.AdditiveBlending // makes it glow slightly if the logo is light
            });
            
            const sprite = new THREE.Sprite(material);
            
-           const r = 250 + Math.random() * 200;
+           // Spherical distribution closer to the camera to ensure clarity
+           const r = 150 + Math.random() * 200;
            const theta = Math.random() * 2 * Math.PI;
            const phi = Math.acos(2 * Math.random() - 1);
            
            sprite.position.x = r * Math.sin(phi) * Math.cos(theta);
-           sprite.position.y = r * Math.sin(phi) * Math.sin(theta);
+           sprite.position.y = (r * Math.sin(phi) * Math.sin(theta)) * 0.5; // flatten slightly like a galaxy disk
            sprite.position.z = r * Math.cos(phi);
            
-           const baseScale = 25 + Math.random() * 25;
+           // Make the logo size bigger and more readable
+           const baseScale = 40 + Math.random() * 40;
            sprite.scale.set(baseScale * 1.5, baseScale, 1);
            
            particles.add(sprite);
@@ -149,8 +165,18 @@ document.addEventListener('HOME_PAGE_RENDERED', () => {
 function animateGalaxy() {
     requestAnimationFrame(animateGalaxy);
     if(particles) {
+        // Core slow rotation
         particles.rotation.y += 0.001;
         particles.rotation.x += 0.0005;
+        
+        // Dynamic smooth tracking of mouse using GSAP quickTo or simple lerp
+        // mouseX and mouseY are globals tracked by three-scene.js (from Earth logic)
+        gsap.to(particles.rotation, {
+           x: mouseY * 0.4,
+           y: mouseX * 0.4,
+           duration: 2,
+           ease: 'power2.out'
+        });
     }
     if(galaxyRenderer && galaxyScene && galaxyCamera) {
        galaxyRenderer.render(galaxyScene, galaxyCamera);
